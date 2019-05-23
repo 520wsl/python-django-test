@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/iview@3.4.2/dist/styles/iview.css">
+    <script type="text/javascript" src="https://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/iview@3.4.2/dist/iview.js"></script>
+</head>
+<body>
+<div id="app" class="main">
+    <Card class="card">
+        <div slot="title">书籍列表</div>
+        <i-table :columns="columns1" :data="book_list"></i-table>
+    </Card>
+    <Card class="card" style="text-align: right">
+         <Page :total="100" />
+    </Card>
+</div>
+
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            book_list: [{
+                'id': 1,
+                'book_Id': '1004608738',
+                'src': '//book.qidian.com/info/1004608738',
+                'title': '圣墟',
+                'img_url': '//bookcover.yuewen.com/qdbimg/349573/1004608738/150',
+                'state': '连载中',
+                'author': '辰东',
+                'chan_id': 0,
+                'chan_name': '玄幻',
+                'sub_id': 0,
+                'sub_name': '东方玄幻',
+                'chapter_total_cnt': 1419,
+                'word_count': 0,
+                'gender': 1,
+                'synoptic': '\r                        在破败中崛起，在寂灭中复苏。沧海成尘，雷电枯竭，那一缕幽雾又一次临近大地，世间的枷锁被打开了，一个全新的世界就此揭开神秘的一角……\r                    ',
+                'platform': '起点中文网',
+                'platform_src': 'https://www.qidian.com',
+                'nex': 0,
+            }, {
+                'id': 2,
+                'book_Id': '1010468795',
+                'src': '//book.qidian.com/info/1010468795',
+                'title': '飞剑问道',
+                'img_url': '//bookcover.yuewen.com/qdbimg/349573/1010468795/150',
+                'state': '连载中',
+                'author': '我吃西红柿',
+                'chan_id': 0,
+                'chan_name': '仙侠',
+                'sub_id': 0,
+                'sub_name': '古典仙侠',
+                'chapter_total_cnt': 739,
+                'word_count': 0,
+                'gender': 1,
+                'synoptic': '\r                        番茄继《吞噬星空》《莽荒纪》《雪鹰领主》后的第九本小说。————在这个世界，有狐仙、河神、水怪、大妖，也有求长生的修行者。修行者们，开法眼，可看妖魔鬼怪。炼一口飞剑，可千里杀敌。千里眼、顺风耳，更可探\r                    ',
+                'platform': '起点中文网',
+                'platform_src': 'https://www.qidian.com',
+                'nex': 0
+            },],
+            columns1: [
+                {
+                    title: '书名',
+                    align: 'center',
+                    key: 'title'
+                },
+                {
+                    title: '封面',
+                    align: 'center',
+                    key: 'img_url',
+                    render: (h, params) => {
+                        group = []
+                        img_url = 'http:' + params.row.img_url
+                        title = params.row.title
+                        group.push(h('img', {
+                            attrs: {
+                                src: img_url,
+                                title: title,
+                                alt: title
+                            },
+                            style: {
+                                'max-width': '100px',
+                                'max-height': '100px'
+                            }
+                        }))
+                        return h('div', group)
+                    }
+                },
+                {
+                    title: '状态',
+                    align: 'center',
+                    key: 'state'
+                },
+                {
+                    title: '作者',
+                    align: 'center',
+                    key: 'author'
+                },
+                {
+                    title: '类型',
+                    align: 'center',
+                    key: 'author',
+                    render: (h, params) => {
+                        chan_name = params.row.chan_name || ''
+                        sub_name = params.row.sub_name || ''
+                        group = []
+                        group.push(
+                            h('span', {}, chan_name)
+                        );
+                        group.push(
+                            h('span', {}, ' / ' + sub_name)
+                        );
+
+                        return ('div', group)
+                    }
+                },
+                {
+                    title: '平台',
+                    align: 'center',
+                    key: 'platform'
+                },
+                {
+                    title: '简介',
+                    width: 600,
+                    align: 'center',
+                    key: 'synoptic'
+                },
+            ]
+        },
+        methods: {
+            show: function () {
+                this.visible = true;
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+    }
+
+    .main {
+        margin: 0 auto;
+        width: 95%;
+    }
+
+    .card {
+        margin-top: 30px;
+    }
+
+    td, th {
+        padding: 5px;
+        border: 1px solid #eee;
+    }
+
+    img {
+        max-height: 150px;
+    }
+</style>
